@@ -1,12 +1,14 @@
 import React from 'react' 
 import styled from "styled-components"
 import Message from "./Message"
-const ViewMessage = ({store}) => {
-    console.log(store.getState().messages)
+import {connect} from "react-redux"
+import {mapStateToProps} from "./FirstView"
+const ViewMessage = (props) => {
+    console.log(props.messages)
 
     const showMsg = () => {
         return(
-            store.getState().messages.map((message, index) => (
+            props.messages.map((message, index) => (
                 <Message key={index} message={message} />
         ))
         )
@@ -23,4 +25,6 @@ const ViewMessage = ({store}) => {
 const Wrap = styled.div`
 `
 
-export default ViewMessage
+export default connect(
+    mapStateToProps
+)(ViewMessage)

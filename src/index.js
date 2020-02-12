@@ -17,16 +17,15 @@ const reducer = combineReducers({
 const store = createStore(reducer)
 console.log(store.getState())
 
-// ReactDOM.render(
-    
-//         <App store={store}/>,
-//     document.getElementById("root")
-// )
 
 const renderApp = () => {
-    ReactDOM.render(<App store={store}/>, document.getElementById('root'))
+    ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>, document.getElementById('root')
+  )
 }
   renderApp()
   store.subscribe(renderApp)
 
-// store.subscribe(() => console.log(store.getState()))
+store.subscribe(() => console.log(store.getState().messages))

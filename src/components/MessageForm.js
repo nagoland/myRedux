@@ -2,8 +2,10 @@ import React, {useState} from 'react'
 import {Form, Button} from "react-bootstrap"
 import styled from "styled-components"
 import { sending } from "../reducers/messageReducer"
+import {connect} from "react-redux"
+import {mapStateToProps} from "./FirstView"
 
-const MessageForm  = ({store}) => {
+const MessageForm  = (props) => {
     const [content, setContent] = useState("")
     const setMsg = (e) => {
         e.preventDefault()
@@ -11,12 +13,11 @@ const MessageForm  = ({store}) => {
     }
     const sendMsg = (e) => {
         e.preventDefault()
-        store.dispatch(sending("wataru", content))
-        // setContent("")
-        console.log(store.getState().messages)
+        props.dispatch(sending("wataru", content))
+        setContent("")
         // store.getState().name.name
         setContent("")
-        store.getState().messages.map(msg=>{
+        props.messages.map(msg=>{
             console.log(msg.content)
         })
     }
@@ -42,4 +43,6 @@ const Wrap = styled.form`
 
 `
 
-export default MessageForm
+export default connect(
+    mapStateToProps
+)(MessageForm)

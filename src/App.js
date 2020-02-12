@@ -6,18 +6,19 @@ import {
     BrowserRouter as Router,
     Route, Link, Redirect, withRouter
   } from 'react-router-dom'
+  import { connect } from 'react-redux'
 
 
-const App = ({store}) => {
-  useEffect(() => {
-    console.log(store.getState().messages)
-  });
+const App = () => {
+  // useEffect(() => {
+  //   console.log(store.getState().messages)
+  // });
     
     return(
     <>
     <Router>
-      <Route exact path="/chatRoom" render={() => <ChatRoom store={store}/>} />
-      <Route exact path="/" render={() => <FirstView store={store}/>} />
+      <Route exact path="/chatRoom" render={() => <ChatRoom />} />
+      <Route exact path="/" render={() => <FirstView />} />
     </Router>
     </>
     )

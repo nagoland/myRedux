@@ -2,16 +2,18 @@ import React from 'react'
 import ViewMessage from "./ViewMessage"
 import MessageForm from "./MessageForm"
 import styled from "styled-components"
+import {connect} from "react-redux"
+import {mapStateToProps} from "./FirstView"
 
 
-const ChatRoom = ({store}) => {
+const ChatRoom = (props) => {
     return(
     <FixedBackground>
     <Wrap>
-        <h1>{store.getState().name.name}さん</h1>
-        <ViewMessage store={store}/>
+        <h1>{props.name.name}さん</h1>
+        <ViewMessage />
     </Wrap>
-    <MessageForm store={store}/>
+    <MessageForm />
     </FixedBackground>
     )
 }
@@ -28,4 +30,6 @@ const FixedBackground = styled.div`
     height: 100vh;
 `
 
-export default ChatRoom
+export default connect(
+    mapStateToProps,
+)(ChatRoom)

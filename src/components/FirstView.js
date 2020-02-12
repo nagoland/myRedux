@@ -6,11 +6,12 @@ import {
     Route, Link, Redirect, withRouter
   } from 'react-router-dom'
 import { naming } from "../reducers/nameReducer"
+import { connect } from 'react-redux'
 
 
 
-const FirstView = ({store}) => {
-    console.log(store)
+const FirstView = (props) => {
+    // console.log(store)
     const [name, setName] = useState("")
     const [text, setText] = useState("What's your name?")
 
@@ -25,14 +26,14 @@ const FirstView = ({store}) => {
             console.log("入力しろ")
         }else{
             setText(`welcome ${name}!`)
-            store.dispatch(naming(name))
+            props.naming(name)
             setName("")
-            console.log(store.getState().name.id)
+            // console.log(store.getState().name.id)
         }
     }
     return(
         <Wrap>
-            {store.getState().name.name}
+            {props.name.name}
             <h1 className="title">Let's chat!</h1>
             <form className="input-name">
                 <Form.Control placeholder="your name" className="form-control" 
@@ -69,5 +70,21 @@ const Wrap = styled.div`
 
 
 `
+export const mapStateToProps = (state) => {
+    return {
+        name: state.name,
+        messages: state.messages
+    }
+}
 
-export default FirstView
+const mapDispatchToProps = {
+    naming,
+  }
+
+const connectedFirstView = connect(
+    mapStateToProps,
+    mapDispatchToProps
+    )
+(FirstView)
+
+export default connectedFirstView
