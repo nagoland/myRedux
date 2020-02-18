@@ -10,6 +10,7 @@ import messageReducer from "./reducers/messageReducer"
 
 
 
+
 const reducer = combineReducers({
     messages: messageReducer, 
     name: nameReducer
@@ -17,6 +18,11 @@ const reducer = combineReducers({
 const store = createStore(reducer)
 console.log(store.getState())
 
+// ReactDOM.render(
+//   <Provider store={store}>
+//     <App />
+//   </Provider>, document.getElementById('root')
+// )
 
 const renderApp = () => {
     ReactDOM.render(
@@ -28,4 +34,4 @@ const renderApp = () => {
   renderApp()
   store.subscribe(renderApp)
 
-store.subscribe(() => console.log(store.getState().messages))
+// store.subscribe(() => console.log(store.getState().messages))

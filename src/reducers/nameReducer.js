@@ -1,7 +1,3 @@
-const initialState = [{
-    name: "wataru",
-    id: 1234
-}]
 const nameReducer = (state = [] , action) => {
     switch(action.type){
         case "JOIN" :

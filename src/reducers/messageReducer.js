@@ -1,8 +1,11 @@
+import firestore from "../config/fireStore"
 
+const db =firestore.collection("messages").doc("content")
 
-const messageReducer = (state=[], action) => {
+const messageReducer = (state=[db], action) => {
     switch(action.type){
         case "ADD_MSG":
+            console.log(db)
             return state.concat(action.data)
         default:
             return state

@@ -14,12 +14,13 @@ const FirstView = (props) => {
     // console.log(store)
     const [name, setName] = useState("")
     const [text, setText] = useState("What's your name?")
+    const [unjoin,setUnjoin] = useState(true)
 
     const settingName = (e) => {
         e.preventDefault()
         setName(e.target.value)
     }
-
+   
     const getName = (e) => {
         e.preventDefault()
         if(name === null || name ===""){
@@ -28,12 +29,13 @@ const FirstView = (props) => {
             setText(`welcome ${name}!`)
             props.naming(name)
             setName("")
+            setUnjoin(false)
             // console.log(store.getState().name.id)
         }
     }
+    
     return(
         <Wrap>
-            {props.name.name}
             <h1 className="title">Let's chat!</h1>
             <form className="input-name">
                 <Form.Control placeholder="your name" className="form-control" 
@@ -42,7 +44,7 @@ const FirstView = (props) => {
                 <Button onClick={getName} className="btn">join</Button>
             </form>
             <h2>{text}</h2>
-            <Link to="/chatRoom"><Button>chat room</Button></Link>
+            <Link to="/chatRoom" ><Button disabled={unjoin}>chat room</Button></Link>
             <Form.Text className="text-muted">
             
         We'll never share your email with anyone else.</Form.Text>
@@ -56,6 +58,7 @@ const Wrap = styled.div`
     justify-content: space-around;
     align-items: center;
     height: 100vh;
+
 
     .input-name {
         display: flex;
